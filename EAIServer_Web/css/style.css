@@ -1,0 +1,13 @@
+/* Empty. Add your own CSS if you like */
+.KeyboardNumber .popup {
+    width: 92%;
+    height: 41%;
+}
+
+.KeyboardNumber .popup-head {
+    display: none;
+}
+
+input:focus {
+    background-color: yellow;
+}

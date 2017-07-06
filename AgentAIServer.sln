@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentAIServer", "EAIServer\AgentAIServer.csproj", "{4B2305A1-90D5-494C-A0A6-9A093CD642F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentAIServer_sqlcmd", "EAIServer_sqlcmd\AgentAIServer_sqlcmd.csproj", "{310FFF6C-ED03-4C2E-A6C5-E07CA26E69CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketTest", "SocketTest\SocketTest\SocketTest.csproj", "{9469031F-3DB2-4C42-AAE6-2F430CA99149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB_IO", "DB_IO\DB_IO.csproj", "{EC4F41B8-F355-4E21-81E9-72AD8CBBB030}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAIServer_Web", "EAIServer_Web\EAIServer_Web.csproj", "{FC89038D-7053-4FE2-8045-3A7CA584FCC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pxmart", "Pxmart-master\Pxmart\Pxmart.csproj", "{DACAC4F8-D44D-4D51-BC76-7763A0BB494B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B2305A1-90D5-494C-A0A6-9A093CD642F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B2305A1-90D5-494C-A0A6-9A093CD642F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B2305A1-90D5-494C-A0A6-9A093CD642F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B2305A1-90D5-494C-A0A6-9A093CD642F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310FFF6C-ED03-4C2E-A6C5-E07CA26E69CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310FFF6C-ED03-4C2E-A6C5-E07CA26E69CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310FFF6C-ED03-4C2E-A6C5-E07CA26E69CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310FFF6C-ED03-4C2E-A6C5-E07CA26E69CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9469031F-3DB2-4C42-AAE6-2F430CA99149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9469031F-3DB2-4C42-AAE6-2F430CA99149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9469031F-3DB2-4C42-AAE6-2F430CA99149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9469031F-3DB2-4C42-AAE6-2F430CA99149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC4F41B8-F355-4E21-81E9-72AD8CBBB030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC4F41B8-F355-4E21-81E9-72AD8CBBB030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC4F41B8-F355-4E21-81E9-72AD8CBBB030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC4F41B8-F355-4E21-81E9-72AD8CBBB030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC89038D-7053-4FE2-8045-3A7CA584FCC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC89038D-7053-4FE2-8045-3A7CA584FCC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC89038D-7053-4FE2-8045-3A7CA584FCC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC89038D-7053-4FE2-8045-3A7CA584FCC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DACAC4F8-D44D-4D51-BC76-7763A0BB494B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DACAC4F8-D44D-4D51-BC76-7763A0BB494B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DACAC4F8-D44D-4D51-BC76-7763A0BB494B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DACAC4F8-D44D-4D51-BC76-7763A0BB494B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

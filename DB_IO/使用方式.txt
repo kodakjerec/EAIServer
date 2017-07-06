@@ -1,0 +1,40 @@
+1.參考加入DB_IO.dll
+	DB_IO_Database_json.txt
+	DB_IO.dll
+	Newtonsoft.Json.dll
+	Newtonsoft.Json.xml
+	須放在同一個路徑下
+2.程式碼宣告
+	DB_IO.Connect db_IO = new DB_IO.Connect();
+3.如何使用
+	1.組成SQL COMMAND
+	程式碼：
+	string sqlcmd="Select Top 10 * from ADJ where po_no=@po";
+
+	2.宣告Hashtable，加入參數
+	不用擔心參數型態，只要SQLServer能吃的，dll會自動轉型
+	程式碼：
+	Hashtable ht1=new Hashtable();
+	ht1.Add("@po","P12345");
+	
+	3.了解你要連到哪台資料庫
+	資料庫連結已經統一管理在txt設定內
+	程式碼：
+	string LoginServer="LGDC";
+
+	3.開始使用
+	Select:
+	DataSet ds = db_IO.SqlQuery(LoginServer, sqlcmd, ht1);
+	
+	Update:
+	int Counts=0;	//更新筆數
+	bool IsOK=db_IO.SqlUpdate(LoginServer, sqlcmd, ht1,ref Counts);
+	
+	Insert(套用Update語法):
+	Delete(套用Update語法);
+	
+	StoreProcedure:
+	Hashtable ht2=new Hashtable();	//回傳的參數清單
+	ht2.Add("@Return_CODE","");
+	ht2.Add("@Return_MSG","");
+	DataSet ds = db_IO.SqlSp(LoginServer, spName, ht1, ht2);

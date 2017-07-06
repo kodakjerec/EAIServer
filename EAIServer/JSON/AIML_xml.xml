@@ -1,0 +1,171 @@
+﻿<DocumentElement>
+  <AIML>
+    <ID>SUCCESS</ID>
+    <CMD>log:SUCCESS @args1</CMD>
+    <SUCCESS />
+    <FAIL />
+    <MEMO>成功, 紀錄log</MEMO>
+  </AIML>
+  <AIML>
+    <ID>FAIL</ID>
+    <CMD>log:FAIL @args1</CMD>
+    <SUCCESS />
+    <FAIL />
+    <MEMO>失敗, 紀錄log</MEMO>
+  </AIML>
+  <AIML>
+    <ID>SEND</ID>
+    <CMD>sendMessage:@args1 cmd:@args2</CMD>
+    <SUCCESS />
+    <FAIL />
+    <MEMO>發送訊息@args2給對象@args1</MEMO>
+  </AIML>
+  <AIML>
+    <ID>ScheduleOK_record</ID>
+    <CMD>sendMessage:@args1 cmd:"ScheduleChange @args2 requestRecord=999"</CMD>
+    <SUCCESS />
+    <FAIL />
+    <MEMO>排程專用, 修改 排程PK=@args2 requestRecord=999 給 @args1</MEMO>
+  </AIML>
+  <AIML>
+    <ID>ScheduleOK</ID>
+    <CMD>sendMessage:@args1 cmd:"ScheduleChange @args2 Flag_IGotMessage=1"</CMD>
+    <SUCCESS />
+    <FAIL />
+    <MEMO>排程專用, 發送 確認排程@args2成功訊息 給 @args1</MEMO>
+  </AIML>
+  <AIML>
+    <ID>ScheduleChange</ID>
+    <CMD>ScheduleChange:@args1 @args2</CMD>
+    <SUCCESS />
+    <FAIL />
+    <MEMO>變更排程內容 ex:@args1&gt;DC1 @args2&gt;Flog_IGotMessage=1</MEMO>
+  </AIML>
+  <AIML>
+    <ID>ScheduleSet</ID>
+    <CMD>scheduleset:@args1 @args2</CMD>
+    <SUCCESS />
+    <FAIL />
+    <MEMO>設定排程內容 ex:@args1&gt;A @args2&gt;period=30</MEMO>
+  </AIML>
+  <AIML>
+    <ID>ScheduleStop</ID>
+    <CMD>schedulestop:@args1</CMD>
+    <SUCCESS />
+    <FAIL />
+    <MEMO>停用排程 ex:@args1&gt;CIF</MEMO>
+  </AIML>
+  <AIML>
+    <ID>ScheduleStart</ID>
+    <CMD>schedulestart:</CMD>
+    <SUCCESS />
+    <FAIL />
+    <MEMO>啟動排程 </MEMO>
+  </AIML>
+  <AIML>
+    <ID>DatabaseSet</ID>
+    <CMD>databaseset:@args1 @args2</CMD>
+    <SUCCESS />
+    <FAIL />
+    <MEMO>設定資料庫內容 ex:@args1&gt;DC2 @args2&gt;connectionstring</MEMO>
+  </AIML>
+  <AIML>
+    <ID>resetall</ID>
+    <CMD>resetall:</CMD>
+    <SUCCESS />
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>全面重新啟動</MEMO>
+  </AIML>
+  <AIML>
+    <ID>restart</ID>
+    <CMD>restart:</CMD>
+    <SUCCESS />
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>重開啟</MEMO>
+  </AIML>
+  <AIML>
+    <ID>DOCMD</ID>
+    <CMD>@args1 @args2 @args3 @args4 ;
+		 sendMessage:parent cmd:"@args1@args2@args3@args4 OK"</CMD>
+    <SUCCESS />
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>直接執行命令</MEMO>
+  </AIML>
+  <AIML>
+    <ID>DOSQLCMD</ID>
+    <CMD>sqlcmd:"@args1" db:"@args2"</CMD>
+    <SUCCESS />
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>直接執行SQL</MEMO>
+  </AIML>
+  <AIML>
+    <ID>query</ID>
+    <CMD>query:"@args1"</CMD>
+    <SUCCESS />
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>查詢系統狀態</MEMO>
+  </AIML>
+  <AIML>
+    <ID>SpDCS_CIF_INBOUND</ID>
+    <CMD>sqlcmd:"SpDCS_CIF_INBOUND" db:DCS</CMD>
+    <SUCCESS>SpDCS_CIF_INBOUND_IDN</SUCCESS>
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>Jenny CIF下傳第1關</MEMO>
+  </AIML>
+  <AIML>
+    <ID>SpDCS_CIF_INBOUND_IDN</ID>
+    <CMD>sqlcmd:"SpDCS_CIF_INBOUND_IDN" db:DCS</CMD>
+    <SUCCESS>SpDCS_CIF_INBOUND_ODN</SUCCESS>
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>Jenny CIF下傳第2關</MEMO>
+  </AIML>
+  <AIML>
+    <ID>SpDCS_CIF_INBOUND_ODN</ID>
+    <CMD>sqlcmd:"SpDCS_CIF_INBOUND_ODN" db:DCS</CMD>
+    <SUCCESS>SpDCS_IDV</SUCCESS>
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>Jenny CIF下傳第3關</MEMO>
+  </AIML>
+  <AIML>
+    <ID>SpDCS_IDV</ID>
+    <CMD>sqlcmd:"SpDCS_IDV" db:DCS</CMD>
+    <SUCCESS>SUCCESS "Jenny SpDCS_DCStest Finish"</SUCCESS>
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>Jenny CIF下傳第4關</MEMO>
+  </AIML>
+  <AIML>
+    <ID>Sptemp_ISHIDA_CreateSFD001</ID>
+    <CMD>sqlcmd:"temp_ISHIDA_CreateSFD001" db:DDI_UNDER</CMD>
+    <SUCCESS>Sptemp_ISHIDA_CreateSFD001_2</SUCCESS>
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>Step1_4/14之前, 每天下傳ISHIDA生產只是</MEMO>
+  </AIML>
+  <AIML>
+    <ID>Sptemp_ISHIDA_CreateSFD001_2</ID>
+    <CMD>local:"C:\Users\Administrator\Desktop\DDI中心\LCU_ISHIDA_PCRS_1\LCU_ISHIDA_PCRS_1.exe" A3W1 ISHIDA1</CMD>
+    <SUCCESS>Sptemp_ISHIDA_CreateSFD001_3</SUCCESS>
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>Step2_4/14之前, 每天下傳ISHIDA生產只是</MEMO>
+  </AIML>
+  <AIML>
+    <ID>sp_DCS_TO_DDI</ID>
+    <CMD>sqlcmd:"sp_DCS_TO_DDI" db:DDI_UPPER</CMD>
+    <SUCCESS>SUCCESS "sp_DCS_TO_DDI OK"</SUCCESS>
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>DCS轉檔到DDI</MEMO>
+  </AIML>
+  <AIML>
+    <ID>Sptemp_ISHIDA_CreateSFD001_3</ID>
+    <CMD>local:"C:\Users\Administrator\Desktop\DDI中心\LCU_TERAOKA_LCU_1\LCU_TERAOKA_LCU_1.exe" A4W1 LCU1</CMD>
+    <SUCCESS>SUCCESS "ISHIDA SFD001 OK"</SUCCESS>
+    <FAIL>FAIL @ErrorMessage</FAIL>
+    <MEMO>Step3_4/14之前, 每天下傳ISHIDA生產只是</MEMO>
+  </AIML>
+  <AIML>
+    <ID>spUP_DCS_SMD_V1_AutoCollect</ID>
+    <CMD>sqlcmd:"spUP_DCS_SMD_V1_OPEN_test '1714501',1 " db:DDI_UPPER</CMD>
+    <SUCCESS />
+    <FAIL />
+    <MEMO>AutoCollect</MEMO>
+  </AIML>
+</DocumentElement>

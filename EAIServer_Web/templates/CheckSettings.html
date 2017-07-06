@@ -1,0 +1,124 @@
+﻿<ion-view view-title="查詢TAKO設定" ng-init="query('command')">
+    <style type="text/css">
+        .col {
+            border:1px solid black
+        }
+        .rowHead {
+            background-color:lightblue;
+        }
+        .gotop {
+            position:fixed;
+            right:20px;
+            bottom: 20px;
+            font-size:xx-large;
+            cursor:pointer;
+        }
+    </style>
+    <ion-nav-buttons class="bar bar-header" side="right">
+        <button id="btn_schedule" class="button button-positive" ng-class="isClicked(0)" ng-click="query('schedule')">
+            排程
+        </button>
+        <button id="btn_database" class="button button-positive" ng-class="isClicked(1)" ng-click="query('database')">
+            資料庫
+        </button>
+        <button id="btn_agent" class="button button-positive" ng-class="isClicked(2)" ng-click="query('agent')">
+            代理人
+        </button>
+        <button id="btn_command" class="button button-positive" ng-class="isClicked(3)" ng-click="query('command')">
+            命令
+        </button>
+        <button id="btn_schedulelist" class="button button-positive" ng-class="isClicked(4)" ng-click="query('schedulelist')">
+            運作中的排程
+        </button>
+    </ion-nav-buttons>
+        <ion-content class="has-header">
+            <div ng-show="schedule.length>0">
+                <div class="row rowHead">
+                    <div class="col">pk</div>
+                    <div class="col">period</div>
+                    <div class="col">longwait</div>
+                    <div class="col">record</div>
+                    <div class="col">longdisconnect</div>
+                    <div class="col">request</div>
+                    <div class="col">action</div>
+                    <div class="col">target</div>
+                    <div class="col">ScheduleSet</div>
+                </div>
+                <div ng-repeat="item in schedule">
+                    <div class="row">
+                        <div class="col"><span style="color:red">{{item.pk}}</span></div>
+                        <div class="col">{{item.period}}</div>
+                        <div class="col">{{item.longwait}}</div>
+                        <div class="col">{{item.record}}</div>
+                        <div class="col">{{item.longdisconnect}}</div>
+                        <div class="col">{{item.request}}</div>
+                        <div class="col">{{item.action}}</div>
+                        <div class="col">{{item.target}}</div>
+                        <div class="col">{{item.ScheduleSet}}</div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="database.length>0">
+                <div class="row rowHead">
+                    <div class="col">PK</div>
+                    <div class="col">ConnectionString</div>
+                </div>
+                <div ng-repeat="item in database">
+                    <div class="row">
+                        <div class="col"><span style="color:red">{{item.PK}}</span></div>
+                        <div class="col">{{item.ConnectionString}}</div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="agent.length>0">
+                <div class="row rowHead">
+                    <div class="col">PK</div>
+                    <div class="col">IP</div>
+                    <div class="col">PORT</div>
+                    <div class="col">MEMO</div>
+                </div>
+                <div ng-repeat="item in agent">
+                    <div class="row">
+                        <div class="col"><span style="color:red">{{item.PK}}</span></div>
+                        <div class="col">{{item.IP}}</div>
+                        <div class="col">{{item.Port}}</div>
+                        <div class="col">{{item.MEMO}}</div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="command.length>0">
+                <div class="row rowHead">
+                    <div class="col">ID</div>
+                    <div class="col">CMD</div>
+                    <div class="col">SUCCESS</div>
+                    <div class="col">FAIL</div>
+                    <div class="col">MEMO</div>
+                </div>
+                <div ng-repeat="item in command">
+                    <div class="row">
+                        <div class="col"><button ng-click="DoTAKOcommand('{{item.ID}}')">發動</button>{{item.ID}}</div>
+                        <div class="col">{{item.CMD}}</div>
+                        <div class="col">{{item.SUCCESS}}</div>
+                        <div class="col">{{item.FAIL}}</div>
+                        <div class="col">{{item.MEMO}}</div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="schedulelist.length>0">
+                <div class="row rowHead">
+                    <div class="col">PK</div>
+                    <div class="col">NextTime</div>
+                    <div class="col">request</div>
+                    <div class="col">action</div>
+                </div>
+                <div ng-repeat="item in schedulelist|orderBy:'NextTime':reverse">
+                    <div class="row">
+                        <div class="col"><span style="color:red">{{item.PK}}</span></div>
+                        <div class="col">{{item.NextTime| date :'yyyy-MM-dd HH:mm'}}</div>
+                        <div class="col">{{item.request}}</div>
+                        <div class="col">{{item.action}}</div>
+                    </div>
+                </div>
+            </div>
+        </ion-content>
+</ion-view>

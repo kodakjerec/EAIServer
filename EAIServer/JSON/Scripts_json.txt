@@ -1,0 +1,38 @@
+[
+  {
+    "Line": "SUCCESS B"
+  },
+  {
+    "Line": "SUCCESS C"
+  },
+  {
+    "Line": "CIF"
+  },
+  {
+    "Line": "ScheduleOK Parnet"
+  },
+  {
+    "Line": "ScheduleOK Next 456 "
+  },
+  {
+    "Line": "ScheduleOK Parnet 123 simplex:A "
+  },
+  {
+    "Line": "ScheduleOK Parnet 123 simplex:B "
+  },
+  {
+    "Line": "ScheduleOK Parnet 123&DCSShfweiof23 simplex:B "
+  },
+  {
+    "Line": "SEND Next MsgTest "
+  },
+  {
+    "Line": "SEND QQ ThisIsWrong "
+  },
+  {
+    "Line": "SEND Parent MsgTest "
+  },
+  {
+    "Line": "SEND DD ThisIsWrong"
+  }
+]

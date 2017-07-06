@@ -1,0 +1,22 @@
+﻿[
+  {
+    "PK": "DC2",
+    "ConnectionString": "Data Source=172.20.5.226;Initial Catalog=DCS ;User Id=dcs_ap;Password=dCs_@P"
+  },
+  {
+    "PK": "DDI_226",
+    "ConnectionString": "Data Source=172.20.5.226;Initial Catalog=DDI ;User Id=dcs_ap;Password=dCs_@P"
+  },
+  {
+    "PK": "DCStest",
+    "ConnectionString": "Data Source=172.31.31.250;Initial Catalog=DCS ;User Id=ncf;Password=ksi"
+  },
+  {
+    "PK": "DDItest",
+    "ConnectionString": "Data Source=172.31.31.250;Initial Catalog=DDI ;User Id=ncf;Password=ksi"
+  },
+  {
+    "PK": "LGDC",
+    "ConnectionString": "Data Source=192.168.100.175;Initial Catalog=LGDC ;User Id=ncf;Password=ksi;Application Name=SmartQuery"
+  }
+]

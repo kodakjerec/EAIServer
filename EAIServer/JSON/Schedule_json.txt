@@ -1,0 +1,38 @@
+﻿[
+  {
+    "pk": "SpDCS_CIF_INBOUND",
+    "DB": "DCS",
+    "period": "1800",
+    "longwait": "180",
+    "record": "100",
+    "longdisconnect": "180",
+    "request": "SpDCS_CIF_INBOUND simplex:A",
+    "action": "",
+    "target": "local",
+    "ScheduleSet": "Day: Week: StartTime:1450 EndTime:2350"
+  },
+  {
+    "pk": "SpTemp_ISHIDA",
+    "DB": "DDI_UNDER",
+    "period": "1800",
+    "longwait": "180",
+    "record": "0",
+    "longdisconnect": "0",
+    "request": "Sptemp_ISHIDA_CreateSFD001",
+    "action": "SEND \"OK\" parent",
+    "target": "parent",
+    "ScheduleSet": "Day: Week: StartTime:0800 EndTime:0810"
+  },
+  {
+    "pk": "sp_DCS_TO_DDI",
+    "DB": "DDI_UPPER",
+    "period": "999999999",
+    "longwait": "0",
+    "record": "0",
+    "longdisconnect": "0",
+    "request": "sp_DCS_TO_DDI",
+    "action": null,
+    "target": "local",
+    "ScheduleSet": "Day: Week: StartTime:0000 EndTime:2400"
+  }
+]

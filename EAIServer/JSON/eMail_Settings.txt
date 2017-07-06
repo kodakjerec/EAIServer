@@ -1,0 +1,11 @@
+[
+  {
+    "sendMail": "Kota_ching@pxmart.com.tw",
+    "receiveMails": "kodakjerec@hotmail.com",
+    "CcsMails": "Kota_ching@pxmart.com.tw",
+    "smtpServer" : "MSG-SRV2.pxmart.com.tw",
+	"smtpPort" : "25",
+	"mailAccount" : "WebManager@pxmart.com.tw",
+	"mailPwd" : "WM23578000"
+  }
+]
