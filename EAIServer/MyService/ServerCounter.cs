@@ -263,7 +263,7 @@ namespace AgentAIServer.MyService
             if (txb_recv_Test.Split('\n').Length > DefaultMaxRows)
             {
                 int Maxrows = txb_recv_Test.Split('\n').Length;
-                string temp = txb_recv_Test.Remove(0, txb_recv_Test.Split('\n')[Maxrows - DefaultMaxRows].Length + 1);
+                string temp = txb_recv_Test.Remove(0, txb_recv_Test.Split('\n')[DefaultMaxRows].Length + 1);
                 txb_recv_Test = null;
                 txb_recv_Test = temp;
                 temp = null;
@@ -284,7 +284,7 @@ namespace AgentAIServer.MyService
             if (txb_send_Test.Split('\n').Length > DefaultMaxRows)
             {
                 int Maxrows = txb_send_Test.Split('\n').Length;
-                string temp = txb_send_Test.Remove(0, txb_send_Test.Split('\n')[Maxrows - DefaultMaxRows].Length + 1);
+                string temp = txb_send_Test.Remove(0, txb_send_Test.Split('\n')[DefaultMaxRows].Length + 1);
                 txb_send_Test = null;
                 txb_send_Test = temp;
                 temp = null;
