@@ -253,8 +253,8 @@ namespace AgentAIServer.MyService
             if (!dr["period"].ToString().Equals(string.Empty))
             {
                 int tmpValue = Convert.ToInt32(dr["period"]);
-                if (tmpValue < 3)
-                    tmpValue = 3;
+                if (tmpValue < 1)
+                    tmpValue = 1;
                 item_ori.period = tmpValue;
             }
 
