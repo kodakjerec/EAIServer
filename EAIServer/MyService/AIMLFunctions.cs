@@ -698,8 +698,9 @@ namespace AgentAIServer.MyService
                     break;
                 }
             }
-            if (CMD == string.Empty)
+            if (CMD.Equals(string.Empty))
                 throw new Exception("沒設定CMD");
+
 
             #region 2.找到對象
             for (int i = 0; i < strlist.Length; i++)
@@ -711,14 +712,14 @@ namespace AgentAIServer.MyService
                     break;
                 }
             }
-            if (targetPK == string.Empty)
+            if (targetPK.Equals(string.Empty))
                 throw new Exception("沒設定對象");
             #endregion
 
             string targetIP = "";
             if (targetPK.ToLower() == "parent")
             {
-                ServerCounter.serverSocket.Send(MySocket, CMD);
+                ServerCounter.serverSocket.Send(MySocket, CMD + Environment.NewLine);
             }
             else
             {
@@ -738,7 +739,7 @@ namespace AgentAIServer.MyService
                         target.clientSocket = ServerCounter.ClientSocketInit(target.clientSocket, target.IP, target.Port);
                     }
 
-                    target.clientSocket.Send(CMD);
+                    target.clientSocket.Send(CMD + Environment.NewLine);
                 }
                 if (targetIP == string.Empty)
                     throw new Exception("沒設定對象的IP");
@@ -792,7 +793,8 @@ namespace AgentAIServer.MyService
         #endregion
 
         #region 系統指令_重開機 restart:
-        internal void System_Restart() {
+        internal void System_Restart()
+        {
             Program.CloseApplication();
         }
         #endregion

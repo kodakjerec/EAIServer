@@ -93,6 +93,7 @@ namespace AgentAIServer
             }
         }
 
+        #region 前端訊息
         static int timer1_tick = 1;
         /// <summary>
         /// 前端重新整理timer
@@ -108,14 +109,22 @@ namespace AgentAIServer
             string lbl_ScheduleItems = "排程 預定執行：" + Environment.NewLine;
             try
             {
+                lbl_ScheduleItems += 
+                      "PK"+ Repeat("",40)
+                    + "|下次" + Repeat("", 20) 
+                    + "|筆數"+ Repeat("", 10) 
+                    + "|時間"+ Repeat("", 12) 
+                    + "|回傳" 
+                    + Environment.NewLine;
+                lbl_ScheduleItems += Repeat("",110,"-") + Environment.NewLine;
                 foreach (Schedule_Item item in ScheduleCounter.scheduleItems)
                 {
                     lbl_ScheduleItems +=
-                        "PK: " + item.PK
-                        + " 下次時間: " + item.NextTime.ToString("yyyy/MM/dd HH:mm:ss")
-                        + " 筆數: " + item.requestRecord + " vs. " + item.record
-                        + " 時間1: " + item.TotalWaitingTime + " vs. " + item.longwait
-                        + " 回傳訊息: " + item.Flag_IGotMessage
+                        Repeat(item.PK,42)
+                        + "|" + Repeat(item.NextTime.ToString("yyyy/MM/dd HH:mm:ss"),24)
+                        + "|" + Repeat(item.requestRecord + "<=" + item.record,14)
+                        + "|" + Repeat(item.TotalWaitingTime + "<=" + item.longwait,14)
+                        + "|" + Repeat(item.Flag_IGotMessage.ToString(),16)
                         + Environment.NewLine;
                 }
 
@@ -146,6 +155,30 @@ namespace AgentAIServer
             label1.Text = lbl_ScheduleItems;
             lbl_ScheduleItems = null;
         }
+        private string Repeat(string str, int count)
+        {
+            int i = str.Length;
+
+            while (i <= count) {
+                str += " ";
+                i++;
+            }
+
+            return str;
+        }
+        private string Repeat(string str, int count,string InsertChar)
+        {
+            int i = str.Length;
+
+            while (i <= count)
+            {
+                str += InsertChar;
+                i++;
+            }
+
+            return str;
+        }
+        #endregion
 
         /// <summary>
         /// 終結所有執行緒
@@ -175,11 +208,11 @@ namespace AgentAIServer
 
             //系統設定文字
             lbl_MyCookies.Text =
-                "連線逾時限制: " + MyCookies.ConnectTimeOut.ToString() + Environment.NewLine
-                + " 本機host: " + MyCookies.host.ToString() + Environment.NewLine
-                + " 預設Port: " + MyCookies.Port.ToString() + Environment.NewLine
-                + " 紀錄log: " + MyCookies.Log.ToString() + Environment.NewLine
-                + " 排程啟動: " + MyCookies.ScheduleOn.ToString() + Environment.NewLine;
+                  "連線逾時限制: " + MyCookies.ConnectTimeOut.ToString() + Environment.NewLine
+                + "本機host: " + MyCookies.host.ToString() + Environment.NewLine
+                + "預設Port: " + MyCookies.Port.ToString() + Environment.NewLine
+                + "紀錄log: " + MyCookies.Log.ToString() + Environment.NewLine
+                + "排程啟動: " + MyCookies.ScheduleOn.ToString() + Environment.NewLine;
 
             tabControl1.SelectedIndex = 0;
             txb_ScheduleStatus.Text = "重整完畢";

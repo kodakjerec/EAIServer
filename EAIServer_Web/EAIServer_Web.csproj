@@ -65,7 +65,6 @@
     <Content Include="js\controllers_ISHIDA.js" />
     <Content Include="js\controllers.js" />
     <Content Include="js\directives.js" />
-    <Content Include="js\services.js" />
     <Content Include="lib\angular-animate\angular-animate.js" />
     <Content Include="lib\angular-animate\angular-animate.min.js" />
     <Content Include="lib\angular-animate\index.js" />

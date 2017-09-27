@@ -100,20 +100,21 @@
             this.tbC_Main.Controls.Add(this.tabPage2);
             this.tbC_Main.Controls.Add(this.tabPage10);
             this.tbC_Main.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tbC_Main.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.tbC_Main.Location = new System.Drawing.Point(0, 25);
+            this.tbC_Main.Margin = new System.Windows.Forms.Padding(4);
             this.tbC_Main.Name = "tbC_Main";
             this.tbC_Main.SelectedIndex = 0;
-            this.tbC_Main.Size = new System.Drawing.Size(792, 537);
+            this.tbC_Main.Size = new System.Drawing.Size(1056, 716);
             this.tbC_Main.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.tabControl1);
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(784, 507);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(1048, 686);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "訊息";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -124,19 +125,21 @@
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(3, 3);
+            this.tabControl1.Location = new System.Drawing.Point(4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(778, 501);
+            this.tabControl1.Size = new System.Drawing.Size(1040, 678);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.txb_ScheduleStatus);
             this.tabPage3.Location = new System.Drawing.Point(4, 26);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(770, 471);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage3.Size = new System.Drawing.Size(1032, 648);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "排程";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -145,8 +148,9 @@
             // 
             this.txb_ScheduleStatus.AutoSize = true;
             this.txb_ScheduleStatus.Location = new System.Drawing.Point(1, 1);
+            this.txb_ScheduleStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txb_ScheduleStatus.Name = "txb_ScheduleStatus";
-            this.txb_ScheduleStatus.Size = new System.Drawing.Size(46, 16);
+            this.txb_ScheduleStatus.Size = new System.Drawing.Size(56, 16);
             this.txb_ScheduleStatus.TabIndex = 0;
             this.txb_ScheduleStatus.Text = "label2";
             // 
@@ -154,9 +158,10 @@
             // 
             this.tabPage4.Controls.Add(this.txb_ReceiveMsg);
             this.tabPage4.Location = new System.Drawing.Point(4, 26);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(770, 471);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage4.Size = new System.Drawing.Size(1032, 648);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "接收";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -165,8 +170,9 @@
             // 
             this.txb_ReceiveMsg.AutoSize = true;
             this.txb_ReceiveMsg.Location = new System.Drawing.Point(1, 1);
+            this.txb_ReceiveMsg.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txb_ReceiveMsg.Name = "txb_ReceiveMsg";
-            this.txb_ReceiveMsg.Size = new System.Drawing.Size(46, 16);
+            this.txb_ReceiveMsg.Size = new System.Drawing.Size(56, 16);
             this.txb_ReceiveMsg.TabIndex = 1;
             this.txb_ReceiveMsg.Text = "label2";
             // 
@@ -174,8 +180,9 @@
             // 
             this.tabPage5.Controls.Add(this.txb_SendMsg);
             this.tabPage5.Location = new System.Drawing.Point(4, 26);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(770, 471);
+            this.tabPage5.Size = new System.Drawing.Size(1032, 648);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "傳送";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -185,8 +192,9 @@
             this.txb_SendMsg.AutoSize = true;
             this.txb_SendMsg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txb_SendMsg.Location = new System.Drawing.Point(0, 0);
+            this.txb_SendMsg.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txb_SendMsg.Name = "txb_SendMsg";
-            this.txb_SendMsg.Size = new System.Drawing.Size(46, 16);
+            this.txb_SendMsg.Size = new System.Drawing.Size(56, 16);
             this.txb_SendMsg.TabIndex = 1;
             this.txb_SendMsg.Text = "label2";
             // 
@@ -194,9 +202,10 @@
             // 
             this.tabPage2.Controls.Add(this.tabControl2);
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(784, 507);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(1048, 686);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "設定";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -209,19 +218,21 @@
             this.tabControl2.Controls.Add(this.tabPage9);
             this.tabControl2.Controls.Add(this.tabPage11);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl2.Location = new System.Drawing.Point(3, 3);
+            this.tabControl2.Location = new System.Drawing.Point(4, 4);
+            this.tabControl2.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(778, 501);
+            this.tabControl2.Size = new System.Drawing.Size(1040, 678);
             this.tabControl2.TabIndex = 3;
             // 
             // tabPage6
             // 
             this.tabPage6.Controls.Add(this.dGV_Schedule);
             this.tabPage6.Location = new System.Drawing.Point(4, 26);
+            this.tabPage6.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(770, 471);
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage6.Size = new System.Drawing.Size(1032, 648);
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "排程";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -242,10 +253,11 @@
             this.col_Schedule_target,
             this.col_Schedule_ScheduleSet});
             this.dGV_Schedule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dGV_Schedule.Location = new System.Drawing.Point(3, 3);
+            this.dGV_Schedule.Location = new System.Drawing.Point(4, 4);
+            this.dGV_Schedule.Margin = new System.Windows.Forms.Padding(4);
             this.dGV_Schedule.Name = "dGV_Schedule";
             this.dGV_Schedule.RowTemplate.Height = 24;
-            this.dGV_Schedule.Size = new System.Drawing.Size(764, 465);
+            this.dGV_Schedule.Size = new System.Drawing.Size(1024, 640);
             this.dGV_Schedule.TabIndex = 1;
             // 
             // col_Schedule_PK
@@ -253,7 +265,7 @@
             this.col_Schedule_PK.DataPropertyName = "pk";
             this.col_Schedule_PK.HeaderText = "PK";
             this.col_Schedule_PK.Name = "col_Schedule_PK";
-            this.col_Schedule_PK.Width = 52;
+            this.col_Schedule_PK.Width = 49;
             // 
             // col_Schedule_DB
             // 
@@ -267,7 +279,7 @@
             this.col_Schedule_period.DataPropertyName = "period";
             this.col_Schedule_period.HeaderText = "執行一次(秒)";
             this.col_Schedule_period.Name = "col_Schedule_period";
-            this.col_Schedule_period.Width = 94;
+            this.col_Schedule_period.Width = 96;
             // 
             // col_Schedule_longwait
             // 
@@ -309,7 +321,7 @@
             this.col_Schedule_target.DataPropertyName = "target";
             this.col_Schedule_target.HeaderText = "回應給誰(代理人)";
             this.col_Schedule_target.Name = "col_Schedule_target";
-            this.col_Schedule_target.Width = 108;
+            this.col_Schedule_target.Width = 111;
             // 
             // col_Schedule_ScheduleSet
             // 
@@ -322,9 +334,10 @@
             // 
             this.tabPage7.Controls.Add(this.dGV_Database);
             this.tabPage7.Location = new System.Drawing.Point(4, 26);
+            this.tabPage7.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(770, 471);
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage7.Size = new System.Drawing.Size(1032, 648);
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "資料庫";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -334,18 +347,20 @@
             this.dGV_Database.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dGV_Database.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGV_Database.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dGV_Database.Location = new System.Drawing.Point(3, 3);
+            this.dGV_Database.Location = new System.Drawing.Point(4, 4);
+            this.dGV_Database.Margin = new System.Windows.Forms.Padding(4);
             this.dGV_Database.Name = "dGV_Database";
             this.dGV_Database.RowTemplate.Height = 24;
-            this.dGV_Database.Size = new System.Drawing.Size(764, 465);
+            this.dGV_Database.Size = new System.Drawing.Size(1024, 640);
             this.dGV_Database.TabIndex = 3;
             // 
             // tabPage8
             // 
             this.tabPage8.Controls.Add(this.dGV_Agent);
             this.tabPage8.Location = new System.Drawing.Point(4, 26);
+            this.tabPage8.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(770, 471);
+            this.tabPage8.Size = new System.Drawing.Size(1032, 648);
             this.tabPage8.TabIndex = 2;
             this.tabPage8.Text = "代理人";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -356,17 +371,19 @@
             this.dGV_Agent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGV_Agent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dGV_Agent.Location = new System.Drawing.Point(0, 0);
+            this.dGV_Agent.Margin = new System.Windows.Forms.Padding(4);
             this.dGV_Agent.Name = "dGV_Agent";
             this.dGV_Agent.RowTemplate.Height = 24;
-            this.dGV_Agent.Size = new System.Drawing.Size(770, 471);
+            this.dGV_Agent.Size = new System.Drawing.Size(1032, 648);
             this.dGV_Agent.TabIndex = 2;
             // 
             // tabPage9
             // 
             this.tabPage9.Controls.Add(this.dGV_AIML);
             this.tabPage9.Location = new System.Drawing.Point(4, 26);
+            this.tabPage9.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(770, 471);
+            this.tabPage9.Size = new System.Drawing.Size(1032, 648);
             this.tabPage9.TabIndex = 3;
             this.tabPage9.Text = "命令";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -377,18 +394,20 @@
             this.dGV_AIML.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGV_AIML.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dGV_AIML.Location = new System.Drawing.Point(0, 0);
+            this.dGV_AIML.Margin = new System.Windows.Forms.Padding(4);
             this.dGV_AIML.Name = "dGV_AIML";
             this.dGV_AIML.RowTemplate.Height = 24;
-            this.dGV_AIML.Size = new System.Drawing.Size(770, 471);
+            this.dGV_AIML.Size = new System.Drawing.Size(1032, 648);
             this.dGV_AIML.TabIndex = 2;
             // 
             // tabPage11
             // 
             this.tabPage11.Controls.Add(this.lbl_MyCookies);
             this.tabPage11.Location = new System.Drawing.Point(4, 26);
+            this.tabPage11.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(770, 471);
+            this.tabPage11.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage11.Size = new System.Drawing.Size(1032, 648);
             this.tabPage11.TabIndex = 4;
             this.tabPage11.Text = "系統設定";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -396,9 +415,10 @@
             // lbl_MyCookies
             // 
             this.lbl_MyCookies.AutoSize = true;
-            this.lbl_MyCookies.Location = new System.Drawing.Point(6, 3);
+            this.lbl_MyCookies.Location = new System.Drawing.Point(8, 4);
+            this.lbl_MyCookies.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_MyCookies.Name = "lbl_MyCookies";
-            this.lbl_MyCookies.Size = new System.Drawing.Size(46, 16);
+            this.lbl_MyCookies.Size = new System.Drawing.Size(56, 16);
             this.lbl_MyCookies.TabIndex = 1;
             this.lbl_MyCookies.Text = "label2";
             // 
@@ -406,8 +426,9 @@
             // 
             this.tabPage10.Controls.Add(this.label1);
             this.tabPage10.Location = new System.Drawing.Point(4, 26);
+            this.tabPage10.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Size = new System.Drawing.Size(784, 507);
+            this.tabPage10.Size = new System.Drawing.Size(1048, 686);
             this.tabPage10.TabIndex = 2;
             this.tabPage10.Text = "動態";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -415,9 +436,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 6);
+            this.label1.Location = new System.Drawing.Point(9, 8);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 16);
+            this.label1.Size = new System.Drawing.Size(56, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
@@ -464,7 +486,7 @@
             this.toolStripButton_restart});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(792, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1056, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -500,12 +522,14 @@
             // 
             // AgentAIServer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 566);
+            this.ClientSize = new System.Drawing.Size(1056, 755);
             this.Controls.Add(this.tbC_Main);
             this.Controls.Add(this.toolStrip1);
+            this.Font = new System.Drawing.Font("細明體", 12F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AgentAIServer";
             this.Text = "TAKOServer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AgentAIServer_FormClosing);

@@ -143,7 +143,7 @@ namespace AgentAIServer.MyService
                             {
                                 //aiml.PutParameter(ref CMD);
                                 ScheduleCounter.InputReceive("ID:[" + DuplexNum + "]" + ID + " 內容:" + CMD);
-                                aiml.Chat(CMD);
+                                aiml.Chat(CMD + Environment.NewLine);
                             }
                             #endregion
 
@@ -153,7 +153,7 @@ namespace AgentAIServer.MyService
                             {
                                 aiml.PutParameter(ref CMD);
                                 ScheduleCounter.InputReceive("ID:[" + DuplexNum + "]" + ID + " 成功:" + CMD);
-                                ShareClientSocket.Send(CMD);
+                                ShareClientSocket.Send(CMD + Environment.NewLine);
                             }
                         }
                         catch (Exception ex)
@@ -171,7 +171,7 @@ namespace AgentAIServer.MyService
                                 //替換錯誤訊息
                                 aiml.PutParameter(ref CMD);
                                 ScheduleCounter.InputReceive("ID:[" + DuplexNum + "]" + ID + " 例外:" + CMD);
-                                ShareClientSocket.Send(CMD);
+                                ShareClientSocket.Send(CMD + Environment.NewLine);
                             }
                         }
                     }
@@ -257,7 +257,7 @@ namespace AgentAIServer.MyService
         {
             if (str1.Length > 1000)
                 str1 = str1.Substring(0, 200);
-            str1=str1.Replace("\r\n", "");
+            str1 = str1.Replace("\r\n", "");
 
             txb_recv_Test += DateTime.Now.ToString("MM/dd HH:mm:ss") + " " + str1 + Environment.NewLine;
             if (txb_recv_Test.Split('\n').Length > DefaultMaxRows)
@@ -278,7 +278,7 @@ namespace AgentAIServer.MyService
         {
             if (str1.Length > 1000)
                 str1 = str1.Substring(0, 200);
-            str1=str1.Replace("\r\n", "");
+            str1 = str1.Replace("\r\n", "");
 
             txb_send_Test += DateTime.Now.ToString("MM/dd HH:mm:ss") + " " + str1 + Environment.NewLine;
             if (txb_send_Test.Split('\n').Length > DefaultMaxRows)

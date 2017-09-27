@@ -35,7 +35,7 @@ namespace AgentAIServer.MyService
 
                 #region 執行查詢指令
                 if (!item.request.Equals(string.Empty))
-                    ServerCounter.ShareClientSocket.Send(item.request);
+                    ServerCounter.ShareClientSocket.Send(item.request + Environment.NewLine);
                 #endregion
 
                 #region 檢查是否滿足條件
@@ -111,7 +111,7 @@ namespace AgentAIServer.MyService
                                 //傳送ok訊息給對方
                                 //send message
                                 InputReceive("排程 " + item.PK + " Send Acknowledge ");
-                                target.clientSocket.Send("ScheduleOK parent " + item.PK);
+                                target.clientSocket.Send("ScheduleOK parent " + item.PK + Environment.NewLine);
 
                                 Steps = 2;
                                 break;
@@ -137,7 +137,7 @@ namespace AgentAIServer.MyService
                     InputReceive("排程 " + item.PK + " action");
 
                     if (!item.action.Equals(string.Empty))
-                        ServerCounter.ShareClientSocket.Send(item.action);
+                        ServerCounter.ShareClientSocket.Send(item.action + Environment.NewLine);
 
                     //正確完成
                     InputReceive("排程 " + item.PK + " Finish");
