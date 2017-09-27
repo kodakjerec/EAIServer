@@ -58,6 +58,7 @@ namespace AgentAIServer.MyService
                 StreamReader sr = new StreamReader("JSON\\AIML_xml.xml", Encoding.GetEncoding("utf-8"));
                 string tmpAIMLxml = sr.ReadToEnd();
                 sr.Close();
+                //避免"<"影響到後續的xml讀檔
                 tmpAIMLxml = tmpAIMLxml.Replace("<=", "&lt;=");
                 XmlReader xmlReader = XmlReader.Create(new StringReader(tmpAIMLxml));
 
@@ -75,6 +76,12 @@ namespace AgentAIServer.MyService
 
                 for (int i = 0; i < ServerCounter.Settings_AIML.Count; i++)
                 {
+                    //&lt;改回"<"
+                    if (ServerCounter.Settings_AIML[i].CMD.IndexOf("&lt;") >= 0) {
+                        ServerCounter.Settings_AIML[i].CMD = ServerCounter.Settings_AIML[i].CMD.Replace("&lt;", "<");
+                    }
+
+                    //檢查是否有PK重複
                     for (int j = 0; j < ServerCounter.Settings_AIML.Count; j++)
                     {
                         if (i != j)

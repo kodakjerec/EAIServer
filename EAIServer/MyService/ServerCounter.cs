@@ -153,7 +153,7 @@ namespace AgentAIServer.MyService
                             {
                                 aiml.PutParameter(ref CMD);
                                 ScheduleCounter.InputReceive("ID:[" + DuplexNum + "]" + ID + " 成功:" + CMD);
-                                ShareClientSocket.Send(CMD + Environment.NewLine);
+                                ShareClientSocket.Send(CMD);
                             }
                         }
                         catch (Exception ex)
@@ -171,7 +171,7 @@ namespace AgentAIServer.MyService
                                 //替換錯誤訊息
                                 aiml.PutParameter(ref CMD);
                                 ScheduleCounter.InputReceive("ID:[" + DuplexNum + "]" + ID + " 例外:" + CMD);
-                                ShareClientSocket.Send(CMD + Environment.NewLine);
+                                ShareClientSocket.Send(CMD);
                             }
                         }
                     }
@@ -263,7 +263,7 @@ namespace AgentAIServer.MyService
             if (txb_recv_Test.Split('\n').Length > DefaultMaxRows)
             {
                 int Maxrows = txb_recv_Test.Split('\n').Length;
-                string temp = txb_recv_Test.Remove(0, txb_recv_Test.Split('\n')[DefaultMaxRows].Length + 1);
+                string temp = txb_recv_Test.Remove(0, txb_recv_Test.Split('\n')[Maxrows - 20].Length + 1);
                 txb_recv_Test = null;
                 txb_recv_Test = temp;
                 temp = null;
@@ -284,7 +284,7 @@ namespace AgentAIServer.MyService
             if (txb_send_Test.Split('\n').Length > DefaultMaxRows)
             {
                 int Maxrows = txb_send_Test.Split('\n').Length;
-                string temp = txb_send_Test.Remove(0, txb_send_Test.Split('\n')[DefaultMaxRows].Length + 1);
+                string temp = txb_send_Test.Remove(0, txb_send_Test.Split('\n')[Maxrows - 20].Length + 1);
                 txb_send_Test = null;
                 txb_send_Test = temp;
                 temp = null;
@@ -376,7 +376,7 @@ namespace AgentAIServer.MyService
         {
             InputReceive(e.Client.RemoteEndPoint.ToString() + " ServerReceive " + " " + e.Message);
 
-            if (e.Message == string.Empty)
+            if (e.Message.Equals(string.Empty))
                 return;
 
             //放入訊息柱列, 避免同IP同訊息重複傳送
@@ -386,7 +386,7 @@ namespace AgentAIServer.MyService
                 return;
             }
             ClientMessage clientMessage = ClientMessageQueue.Add(clientIP, e.Message);
-            if (clientMessage.IP == string.Empty)
+            if (clientMessage.IP.Equals(string.Empty))
             {
                 //重複發送
                 return;

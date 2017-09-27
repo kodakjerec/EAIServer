@@ -165,7 +165,7 @@ namespace AgentAIServer
         /// <param name="e"></param>
         private void btn_refresh_Click(object sender, EventArgs e)
         {
-            ServerCounter.ShareClientSocket.Send("resetall" + Environment.NewLine);
+            ServerCounter.ShareClientSocket.Send("resetall");
 
             //設定檔
             dGV_Database.DataSource = ServerCounter.dt_Database;

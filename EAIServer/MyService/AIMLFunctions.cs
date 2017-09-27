@@ -655,6 +655,9 @@ namespace AgentAIServer.MyService
             else
                 answerContent = answer.Substring(answer.IndexOf(">") + 1, answer.Length - answer.IndexOf(">") - 1);
 
+            if (answerContent.Equals(string.Empty))
+                return;
+
             switch (answerType)
             {
                 case "table>":
@@ -691,13 +694,12 @@ namespace AgentAIServer.MyService
             {
                 if (strlist[i].Contains("cmd:"))
                 {
-                    CMD = strlist[i + 1] + Environment.NewLine;
+                    CMD = strlist[i + 1];
                     break;
                 }
             }
             if (CMD == string.Empty)
                 throw new Exception("沒設定CMD");
-            CMD += Environment.NewLine;
 
             #region 2.找到對象
             for (int i = 0; i < strlist.Length; i++)

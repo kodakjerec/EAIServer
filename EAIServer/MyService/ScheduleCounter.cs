@@ -34,7 +34,8 @@ namespace AgentAIServer.MyService
                 InputReceive("排程 " + item.PK + " Start");
 
                 #region 執行查詢指令
-                ServerCounter.ShareClientSocket.Send(item.request + Environment.NewLine);
+                if (!item.request.Equals(string.Empty))
+                    ServerCounter.ShareClientSocket.Send(item.request);
                 #endregion
 
                 #region 檢查是否滿足條件
@@ -78,7 +79,8 @@ namespace AgentAIServer.MyService
                         //建立連線
                         string targetPK = item.target;
                         Settings_Agent_Item target = ServerCounter.Settings_Agent.Find(a => a.PK == targetPK);
-                        switch (Steps) {
+                        switch (Steps)
+                        {
                             case 0:
                                 if (target != null)
                                 {
@@ -109,7 +111,7 @@ namespace AgentAIServer.MyService
                                 //傳送ok訊息給對方
                                 //send message
                                 InputReceive("排程 " + item.PK + " Send Acknowledge ");
-                                target.clientSocket.Send("ScheduleOK parent " + item.PK + Environment.NewLine);
+                                target.clientSocket.Send("ScheduleOK parent " + item.PK);
 
                                 Steps = 2;
                                 break;
@@ -134,7 +136,8 @@ namespace AgentAIServer.MyService
                     //執行指令
                     InputReceive("排程 " + item.PK + " action");
 
-                    ServerCounter.ShareClientSocket.Send(item.action + Environment.NewLine);
+                    if (!item.action.Equals(string.Empty))
+                        ServerCounter.ShareClientSocket.Send(item.action);
 
                     //正確完成
                     InputReceive("排程 " + item.PK + " Finish");
