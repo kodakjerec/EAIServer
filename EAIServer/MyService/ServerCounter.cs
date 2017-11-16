@@ -255,18 +255,26 @@ namespace AgentAIServer.MyService
         /// <param name="str1"></param>
         public static void InputReceive(string str1)
         {
-            if (str1.Length > 1000)
-                str1 = str1.Substring(0, 200);
-            str1 = str1.Replace("\r\n", "");
-
-            txb_recv_Test += DateTime.Now.ToString("MM/dd HH:mm:ss") + " " + str1 + Environment.NewLine;
-            if (txb_recv_Test.Split('\n').Length > DefaultMaxRows)
+            try
             {
-                int Maxrows = txb_recv_Test.Split('\n').Length;
-                string temp = txb_recv_Test.Remove(0, txb_recv_Test.Split('\n')[Maxrows - 20].Length + 1);
-                txb_recv_Test = null;
-                txb_recv_Test = temp;
-                temp = null;
+                if (str1.Length > 1000)
+                    str1 = str1.Substring(0, 200);
+                str1 = str1.Replace("\r\n", "");
+
+                txb_recv_Test += DateTime.Now.ToString("MM/dd HH:mm:ss") + " " + str1 + Environment.NewLine;
+                if (txb_recv_Test.Split('\n').Length > DefaultMaxRows)
+                {
+                    int Maxrows = txb_recv_Test.Split('\n').Length;
+                    string temp = txb_recv_Test.Remove(0, txb_recv_Test.Split('\n')[Maxrows - 20].Length + 1);
+                    txb_recv_Test = null;
+                    txb_recv_Test = temp;
+                    temp = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.recLog(ex.Message, "Error");
+                txb_recv_Test = "";
             }
         }
 
@@ -276,18 +284,26 @@ namespace AgentAIServer.MyService
         /// <param name="str1"></param>
         public static void InputSend(string str1)
         {
-            if (str1.Length > 1000)
-                str1 = str1.Substring(0, 200);
-            str1 = str1.Replace("\r\n", "");
-
-            txb_send_Test += DateTime.Now.ToString("MM/dd HH:mm:ss") + " " + str1 + Environment.NewLine;
-            if (txb_send_Test.Split('\n').Length > DefaultMaxRows)
+            try
             {
-                int Maxrows = txb_send_Test.Split('\n').Length;
-                string temp = txb_send_Test.Remove(0, txb_send_Test.Split('\n')[Maxrows - 20].Length + 1);
-                txb_send_Test = null;
-                txb_send_Test = temp;
-                temp = null;
+                if (str1.Length > 1000)
+                    str1 = str1.Substring(0, 200);
+                str1 = str1.Replace("\r\n", "");
+
+                txb_send_Test += DateTime.Now.ToString("MM/dd HH:mm:ss") + " " + str1 + Environment.NewLine;
+                if (txb_send_Test.Split('\n').Length > DefaultMaxRows)
+                {
+                    int Maxrows = txb_send_Test.Split('\n').Length;
+                    string temp = txb_send_Test.Remove(0, txb_send_Test.Split('\n')[Maxrows - 20].Length + 1);
+                    txb_send_Test = null;
+                    txb_send_Test = temp;
+                    temp = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.recLog(ex.Message, "Error");
+                txb_send_Test = "";
             }
         }
 
