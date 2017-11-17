@@ -37,7 +37,7 @@ namespace SocketTest
                 StreamReader sr1 = new StreamReader("JSON\\Agent_json.txt", Encoding.GetEncoding("BIG5"));
                 try
                 {
-                    DataTable dt = AgentAIServer.JSON.JSONconvert.JSONstrToDataTable(sr1.ReadToEnd());
+                    DataTable dt = DB_IO.JSONconvert.JSONstrToDataTable(sr1.ReadToEnd());
                     foreach (DataRow dr in dt.Rows)
                     {
                         if (dr["PK"].ToString() == "local")
@@ -60,7 +60,7 @@ namespace SocketTest
                 StreamReader sr = new StreamReader("JSON\\Scripts_json.txt", Encoding.GetEncoding("BIG5"));
                 try
                 {
-                    DataTable dt = AgentAIServer.JSON.JSONconvert.JSONstrToDataTable(sr.ReadToEnd());
+                    DataTable dt = DB_IO.JSONconvert.JSONstrToDataTable(sr.ReadToEnd());
                     string param = "";
                     foreach (DataRow dr in dt.Rows)
                         param += dr[0].ToString() + Environment.NewLine;
@@ -133,14 +133,18 @@ namespace SocketTest
             }
             else
             {
-                txb_log.Text += DateTime.Now.ToString("HH:mm:ss") + " " + Msg + Environment.NewLine;
+                txb_log.Text += DateTime.Now.ToString("HH:mm:ss") + " " + Msg;
 
                 if (txb_log.Lines.Length > 20)
                 {
-                    for (int i = 10; i < txb_log.Lines.Length; i++)
+                    string[] lines = txb_log.Text.Split(new[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
+                    int Maxrows = lines.Length;
+                    string temp = "";
+                    for (int i = (Maxrows - 20); i < Maxrows; i++)
                     {
-                        txb_log.Text = txb_log.Text.Remove(0, txb_log.Lines[0].Length + Environment.NewLine.Length);
+                        temp += lines[i] + Environment.NewLine;
                     }
+                    txb_log.Text = temp;
                 }
             }
         }

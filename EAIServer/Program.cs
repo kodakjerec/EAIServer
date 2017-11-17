@@ -180,7 +180,7 @@ namespace AgentAIServer
         /// </summary>
         public static void CloseApplication()
         {
-            //server.ServerOFF();
+            server.ServerOFF();
             Application.ExitThread();
             Environment.Exit(0);
         }

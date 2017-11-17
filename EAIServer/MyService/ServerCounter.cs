@@ -11,6 +11,8 @@ using System.IO;
  * log
  * 2017.06.26 Kota  1. 加入函數ServerOFF
  *                  2. 函數ServerON加入清除log
+ * 2017.11.17 Kota  1. serverSocket_OnClientRead加入當ClientMessage=null不做處理
+ *                  2. InputReceiveMessage 加入擷取字串時發生例外地排除
  */
 namespace AgentAIServer.MyService
 {
@@ -76,10 +78,15 @@ namespace AgentAIServer.MyService
 
         public void ServerOFF()
         {
-            //單工作業判斷OFF
-            ServerDuplexON = false;
+            //關閉 sockets
+            ShareClientSocket.Close();
+            serverSocket.Close();
 
-            //排程thread OFF
+            //Server threads OFF
+            ServerDuplexON = false;
+            RemoveAll();
+
+            //排程 threads OFF
             ScheduleCounter.StopSchedule();
         }
         #endregion
@@ -257,18 +264,28 @@ namespace AgentAIServer.MyService
         {
             try
             {
-                if (str1.Length > 1000)
-                    str1 = str1.Substring(0, 200);
-                str1 = str1.Replace("\r\n", "");
-
-                txb_recv_Test += DateTime.Now.ToString("MM/dd HH:mm:ss") + " " + str1 + Environment.NewLine;
-                if (txb_recv_Test.Split('\n').Length > DefaultMaxRows)
+                //逐行寫入log
+                foreach (string line in str1.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    int Maxrows = txb_recv_Test.Split('\n').Length;
-                    string temp = txb_recv_Test.Remove(0, txb_recv_Test.Split('\n')[Maxrows - 20].Length + 1);
-                    txb_recv_Test = null;
+                    txb_recv_Test += DateTime.Now.ToString("MM/dd HH:mm:ss") + " " + line + Environment.NewLine;
+                }
+
+                //刪除多餘log
+                string[] lines = txb_recv_Test.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                int Maxrows = lines.Length;
+
+                if (Maxrows > DefaultMaxRows)
+                {
+                    string temp = "";
+                    for (int i = (Maxrows - DefaultMaxRows); i < Maxrows; i++)
+                    {
+                        temp += lines[i] + Environment.NewLine;
+                    }
                     txb_recv_Test = temp;
-                    temp = null;
+                }
+                else
+                {
+                    txb_recv_Test += Environment.NewLine;
                 }
             }
             catch (Exception ex)
@@ -286,18 +303,26 @@ namespace AgentAIServer.MyService
         {
             try
             {
-                if (str1.Length > 1000)
-                    str1 = str1.Substring(0, 200);
-                str1 = str1.Replace("\r\n", "");
-
-                txb_send_Test += DateTime.Now.ToString("MM/dd HH:mm:ss") + " " + str1 + Environment.NewLine;
-                if (txb_send_Test.Split('\n').Length > DefaultMaxRows)
+                //逐行寫入log
+                foreach (string line in str1.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    int Maxrows = txb_send_Test.Split('\n').Length;
-                    string temp = txb_send_Test.Remove(0, txb_send_Test.Split('\n')[Maxrows - 20].Length + 1);
-                    txb_send_Test = null;
+                    if (line == string.Empty)
+                        continue;
+                    txb_send_Test += DateTime.Now.ToString("MM/dd HH:mm:ss") + " " + line + Environment.NewLine;
+                }
+
+                //刪除多餘log
+                string[] lines = txb_send_Test.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                int Maxrows = lines.Length;
+
+                if (Maxrows > DefaultMaxRows)
+                {
+                    string temp = "";
+                    for (int i = (Maxrows - DefaultMaxRows); i < Maxrows; i++)
+                    {
+                        temp += lines[i] + Environment.NewLine;
+                    }
                     txb_send_Test = temp;
-                    temp = null;
                 }
             }
             catch (Exception ex)
@@ -363,7 +388,7 @@ namespace AgentAIServer.MyService
 
         void serverSocket_OnClientWrite(object sender, Pxmart.Sockets.ClientWriteEventArgs e)
         {
-            InputSend(e.Client.RemoteEndPoint.ToString() + " ServerSend " + " " + e.Message);
+            InputSend(e.Client.RemoteEndPoint.ToString() + " Server Send " + " " + e.Message);
 
         }
 
@@ -390,11 +415,12 @@ namespace AgentAIServer.MyService
 
         void serverSocket_OnClientRead(object sender, Pxmart.Sockets.ClientReadEventArgs e)
         {
-            InputReceive(e.Client.RemoteEndPoint.ToString() + " ServerReceive " + " " + e.Message);
-
             if (e.Message.Equals(string.Empty))
                 return;
 
+            InputReceive(e.Client.RemoteEndPoint.ToString() + " Server Receive " + " " + e.Message);
+
+            #region 訊息柱列, 避免重複處理
             //放入訊息柱列, 避免同IP同訊息重複傳送
             string clientIP = ((IPEndPoint)(e.Client.RemoteEndPoint)).Address.ToString();
             if (clientIP == null)
@@ -402,12 +428,19 @@ namespace AgentAIServer.MyService
                 return;
             }
             ClientMessage clientMessage = ClientMessageQueue.Add(clientIP, e.Message);
+            if (clientMessage == null)
+            {
+                //例外: 訊息在回傳回來前被處理掉了, 多工又處理極快的速度下可能發生
+                return;
+            }
             if (clientMessage.IP.Equals(string.Empty))
             {
                 //重複發送
                 return;
             }
+            #endregion
 
+            #region 執行命令
             ClientMessageParameters cmp = new ClientMessageParameters();
             AIMLCounter aiml = new AIMLCounter();
             aiml.cmp = cmp;
@@ -416,6 +449,8 @@ namespace AgentAIServer.MyService
             {
                 getMessage(message, (Socket)e.Client);
             }
+            #endregion
+
             //刪除訊息柱列
             ClientMessageQueue.Remove(clientIP, e.Message);
         }
@@ -443,6 +478,9 @@ namespace AgentAIServer.MyService
 
         static void clientSocket1_OnReceive(object sender, Pxmart.Sockets.ReceiveEventArgs e)
         {
+            if (e.Message.Equals(string.Empty))
+                return;
+
             //Log
             InputReceive(((Pxmart.Sockets.ClientSocket)sender).LocalEndPoint.ToString() + " Client Receive " + " " + e.Message);
             ShareClientSocket.Send(e.Message);

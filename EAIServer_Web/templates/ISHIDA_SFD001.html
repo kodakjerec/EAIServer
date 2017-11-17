@@ -3,8 +3,6 @@
         <ion-item class="item-input-inset">
             <span>區域</span>
             <input type="text" ng-model="search.DEVICE_AREA" name="title" />
-            <span>批次</span>
-            <input type="text" ng-model="search.OrderNo" name="title" />
             <span>呼出碼</span>
             <input type="text" ng-model="search.CALLING_NUM" name="title" />
             <span>作業區分</span>
@@ -13,9 +11,14 @@
             <input type="text" ng-model="search.Shop" name="title" />
         </ion-item>
         <button class="button button-positive" ng-click="query('SFD001')">查詢</button>
+        <div class="buttons">
+            <button class="button button-positive" ng-click="query('SFD001','previous')">Previous</button>
+            <button class="button button-positive" ng-click="query('SFD001','next')">Next</button>
+        </div>
     </div>
     <ion-content class="has-header has-subheader">
         <div class="row">
+            <div class="col">順序</div>
             <div class="col">呼出碼</div>
             <div class="col">作業區分</div>
             <div class="col">班別</div>
@@ -24,11 +27,12 @@
             <div class="col">店鋪代碼</div>
             <div class="col">計量區分</div>
             <div class="col">生產指示數</div>
-            <div class="col">單價(元/kg)</div>
-            <div class="col">定額</div>
+            <div class="col">銷售單價</div>
+            <div class="col">定價</div>
         </div>
-        <div ng-repeat="item in SFD001|orderBy:'Field10'">
+        <div ng-repeat="item in SFD001">
             <div class="row">
+                <div class="col">{{item.Field10}}</div>
                 <div class="col">{{item.Field02}}</div>
                 <div class="col">{{item.Field03}}</div>
                 <div class="col">{{item.Field04}}</div>

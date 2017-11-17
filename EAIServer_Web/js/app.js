@@ -54,26 +54,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
             }
         }
     })
-    .state('ISHIDA.SFM001', {
-        url: '/SFM001',
-        cache: false,
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/ISHIDA_SFM001.html',
-                controller: 'ISHIDA_SFM001Ctrl'
-            }
-        }
-    })
-    .state('ISHIDA.SFM002', {
-        url: '/SFM002',
-        cache: false,
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/ISHIDA_SFM002.html',
-                controller: 'ISHIDA_SFM002Ctrl'
-            }
-        }
-    })
 ;
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/ISHIDA/SFD001');
