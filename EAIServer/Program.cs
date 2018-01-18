@@ -86,7 +86,7 @@ namespace AgentAIServer
                 //取得本機IP
                 using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
                 {
-                    socket.Connect("10.0.2.4", 65530);
+                    socket.Connect("192.168.100.61", 65530);
                     IPEndPoint endPoint = socket.LocalEndPoint as IPEndPoint;
                     localIP = endPoint.Address.ToString();
                 }

@@ -565,7 +565,7 @@ namespace AgentAIServer.MyService
                     Process instance = new Process();
                     instance.StartInfo.FileName = filepath;
                     instance.StartInfo.Arguments = arguments;
-                    instance.StartInfo.UseShellExecute = true;
+                    instance.StartInfo.UseShellExecute = false;
                     instance.StartInfo.CreateNoWindow = true;
                     instance.StartInfo.WorkingDirectory = Path.GetDirectoryName(filepath);
                     instance.Start();
