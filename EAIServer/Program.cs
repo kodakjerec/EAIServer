@@ -186,7 +186,7 @@ namespace AgentAIServer
         }
 
         #region Log
-        static object lockobj = new object();
+        private static ReaderWriterLockSlim _readWriteLock = new ReaderWriterLockSlim();
         /// <summary>
         /// Log寫入備份檔
         /// </summary>
@@ -199,19 +199,24 @@ namespace AgentAIServer
 
             string path = "log\\" + type + DateTime.Now.ToString("yyyyMMdd") + ".txt";
 
-            lock (lockobj)
+            _readWriteLock.EnterWriteLock();
+            try
             {
-                try
+                using (StreamWriter writer = new StreamWriter(path, true))
                 {
-                    StreamWriter writer = new StreamWriter(path, true);
                     writer.Write(Message + Environment.NewLine);
                     writer.Close();
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                _readWriteLock.ExitWriteLock();
+            }
+
         }
         #endregion
 
