@@ -3,6 +3,7 @@
     "ConnectTimeOut": "0",
     "Log": "ON",
     "Port": "1813",
-    "ScheduleON" : "ON"
+    "ScheduleON" : "ON",
+	"UIRefreshTime" : "500"
   }
 ]

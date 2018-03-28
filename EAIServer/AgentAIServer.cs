@@ -74,6 +74,7 @@ namespace AgentAIServer
             notifyIcon1.Text = this.Text;
 
             //計時
+            timer1.Interval = MyCookies.UIRefreshTime;
             timer1.Start();
 
             toolStripBtn_refresh.PerformClick();

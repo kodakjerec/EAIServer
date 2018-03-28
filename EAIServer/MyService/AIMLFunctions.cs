@@ -765,7 +765,6 @@ namespace AgentAIServer.MyService
                     break;
                 }
             }
-
             Program.recLog(content, type);
         }
         #endregion

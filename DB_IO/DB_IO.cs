@@ -50,7 +50,7 @@ namespace DB_IO
                 DataTable dt_Settings = JSONconvert.JSONstrToDataTable(sr.ReadToEnd());
                 sr.Close();
 
-                string FilePath = rootFolder + dt_Settings.Rows[0]["DB_FilePath"].ToString() + dt_Settings.Rows[0]["DB_FileName"].ToString();
+                string FilePath = dt_Settings.Rows[0]["DB_FilePath"].ToString() + dt_Settings.Rows[0]["DB_FileName"].ToString();
                 sr = new StreamReader(FilePath, Encoding.GetEncoding("utf-8"));
                 dt_Database= JSONconvert.JSONstrToDataTable(sr.ReadToEnd());
                 sr.Close();

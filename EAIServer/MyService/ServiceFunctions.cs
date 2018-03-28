@@ -77,7 +77,8 @@ namespace AgentAIServer.MyService
                 for (int i = 0; i < ServerCounter.Settings_AIML.Count; i++)
                 {
                     //&lt;改回"<"
-                    if (ServerCounter.Settings_AIML[i].CMD.IndexOf("&lt;") >= 0) {
+                    if (ServerCounter.Settings_AIML[i].CMD.IndexOf("&lt;") >= 0)
+                    {
                         ServerCounter.Settings_AIML[i].CMD = ServerCounter.Settings_AIML[i].CMD.Replace("&lt;", "<");
                     }
 
@@ -123,6 +124,8 @@ namespace AgentAIServer.MyService
                     MyCookies.ScheduleOn = false;
                 else
                     MyCookies.ScheduleOn = true;
+
+                MyCookies.UIRefreshTime = Convert.ToInt32(dt.Rows[0]["UIRefreshTime"]);
             }
             catch (Exception ex)
             {
@@ -142,18 +145,20 @@ namespace AgentAIServer.MyService
             if (ServerCounter.dt_Database != null)
                 ServerCounter.dt_Database = null;
 
-            StreamReader sr = new StreamReader("DLL\\DB_IO_Database_json.txt", Encoding.GetEncoding("utf-8"));
             try
             {
+                StreamReader sr = new StreamReader("Settings.txt", Encoding.GetEncoding("utf-8"));
+                DataTable dt_Settings = DB_IO.JSONconvert.JSONstrToDataTable(sr.ReadToEnd());
+                sr.Close();
+
+                string FilePath = dt_Settings.Rows[0]["DB_FilePath"].ToString() + dt_Settings.Rows[0]["DB_FileName"].ToString();
+                sr = new StreamReader(FilePath, Encoding.GetEncoding("utf-8"));
                 ServerCounter.dt_Database = DB_IO.JSONconvert.JSONstrToDataTable(sr.ReadToEnd());
+                sr.Close();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
-            finally
-            {
-                sr.Close();
             }
         }
 
@@ -238,7 +243,7 @@ namespace AgentAIServer.MyService
             StreamWriter sw = new StreamWriter("JSON\\Agent_json.txt", false, Encoding.GetEncoding("utf-8"));
             try
             {
-                DataTable dt= DB_IO.JSONconvert.ListToDataTable<Settings_Agent_Item>(ServerCounter.Settings_Agent);
+                DataTable dt = DB_IO.JSONconvert.ListToDataTable<Settings_Agent_Item>(ServerCounter.Settings_Agent);
                 dt.Columns.Remove("clientSocket");
 
                 string json = DB_IO.JSONconvert.DataTableToJSONstr(dt);
@@ -264,7 +269,8 @@ namespace AgentAIServer.MyService
             {
                 DataTable dt = DB_IO.JSONconvert.ListToDataTable<Settings_AIML_Item>(ServerCounter.Settings_AIML);
                 //欄位有DBnull,需替換成空白字元""
-                foreach (DataRow dr in dt.Rows) {
+                foreach (DataRow dr in dt.Rows)
+                {
                     for (int i = 0; i < dt.Columns.Count; i++)
                     {
                         if (dr[i] == DBNull.Value)
@@ -292,19 +298,21 @@ namespace AgentAIServer.MyService
             if (ServerCounter.dt_Database == null)
                 return;
 
-            StreamWriter sw = new StreamWriter("DLL\\DB_IO_Database_json.txt", false, Encoding.GetEncoding("utf-8"));
             try
             {
+                StreamReader sr = new StreamReader("Settings.txt", Encoding.GetEncoding("utf-8"));
+                DataTable dt_Settings = DB_IO.JSONconvert.JSONstrToDataTable(sr.ReadToEnd());
+                sr.Close();
+
+                string FilePath = dt_Settings.Rows[0]["DB_FilePath"].ToString() + dt_Settings.Rows[0]["DB_FileName"].ToString();
+                StreamWriter sw = new StreamWriter(FilePath, false, Encoding.GetEncoding("utf-8"));
                 string json = DB_IO.JSONconvert.DataTableToJSONstr(ServerCounter.dt_Database);
                 sw.WriteLine(json);
+                sw.Close();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
-            finally
-            {
-                sw.Close();
             }
         }
 
@@ -321,7 +329,7 @@ namespace AgentAIServer.MyService
             try
             {
                 string json = DB_IO.JSONconvert.DataTableToJSONstr(ServerCounter.dt_Schedule);
-                sw.WriteLine(json);             
+                sw.WriteLine(json);
             }
             catch (Exception ex)
             {

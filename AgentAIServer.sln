@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB_IO", "DB_IO\DB_IO.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAIServer_Web", "EAIServer_Web\EAIServer_Web.csproj", "{FC89038D-7053-4FE2-8045-3A7CA584FCC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pxmart", "Pxmart-master\Pxmart\Pxmart.csproj", "{DACAC4F8-D44D-4D51-BC76-7763A0BB494B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pxmart", "..\PxmartMonitor\Pxmart\Pxmart.csproj", "{DACAC4F8-D44D-4D51-BC76-7763A0BB494B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

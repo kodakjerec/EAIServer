@@ -13,6 +13,9 @@ using System.IO;
  *                  2. 函數ServerON加入清除log
  * 2017.11.17 Kota  1. serverSocket_OnClientRead加入當ClientMessage=null不做處理
  *                  2. InputReceiveMessage 加入擷取字串時發生例外地排除
+ * 2018.03.28 Kota  1. command Fail改為先塞入log, 以後不用再指定Fail @ErrorMessage
+ *                  2. 檢查命令不重複的判斷, 從ServerSocket轉移到getmessage
+ *                      實作上發現command用thread的方式丟出去後, serverSocket失去等待command做完才回傳的功能=>不重複判斷無效
  */
 namespace AgentAIServer.MyService
 {
@@ -137,13 +140,35 @@ namespace AgentAIServer.MyService
                 }
                 #endregion
 
+                //thread名稱, message名稱
+                string threadName = "[" + DuplexNum + "]" + string.Join(" ", args);
+
+                #region 訊息柱列, 避免重複處理
+                //放入訊息柱列, 避免同IP同訊息重複傳送
+                string clientIP = ((IPEndPoint)(clientSocket.RemoteEndPoint)).Address.ToString();
+                //沒有IP, 直接返回
+                if (clientIP == null)
+                    return;
+
+                ClientMessage clientMessage = ClientMessageQueue.Add(clientIP, threadName);
+
+                //沒有傳入訊息
+                //例外: 訊息在回傳回來前被處理掉了, 多工又處理極快的速度下可能發生
+                if (clientMessage == null)
+                    return;
+
+                //1. 放入訊息柱列失敗
+                //2. 重複發送
+                if (clientMessage.IP==null)
+                    return;
+                #endregion
+
                 #region 產生Thread
                 Thread threadCMD = new Thread(
                     delegate ()
                     {
                         try
                         {
-                            #region 主要執行命令
                             //命令:CMD
                             string CMD = item.CMD;
                             if (!CMD.Equals(string.Empty))
@@ -152,7 +177,6 @@ namespace AgentAIServer.MyService
                                 ScheduleCounter.InputReceive("ID:[" + DuplexNum + "]" + ID + " 內容:" + CMD);
                                 aiml.Chat(CMD + Environment.NewLine);
                             }
-                            #endregion
 
                             //成功:SUCCESS
                             CMD = item.SUCCESS;
@@ -166,6 +190,11 @@ namespace AgentAIServer.MyService
                         catch (Exception ex)
                         {
                             //例外:FAIL
+
+                            //2018.03.28 Kota 必定先記入log
+                            Program.recLog(ex.ToString(), "FAIL");
+
+                            //正常處理
                             string CMD = item.FAIL;
                             if (!CMD.Equals(string.Empty))
                             {
@@ -181,12 +210,16 @@ namespace AgentAIServer.MyService
                                 ShareClientSocket.Send(CMD + Environment.NewLine);
                             }
                         }
+                        finally {
+                            //刪除訊息柱列
+                            ClientMessageQueue.Remove(clientIP, threadName);
+                        }
                     }
                     );
                 #endregion
 
                 #region 執行Thread
-                threadCMD.Name = "[" + DuplexNum + "]" + string.Join("", args);
+                threadCMD.Name = threadName;
                 serverThreads.Add(threadCMD);
                 if (DuplexNum == string.Empty)
                 {
@@ -211,8 +244,10 @@ namespace AgentAIServer.MyService
             {
                 try
                 {
+                    //清除沒用的thread
                     serverThreads.RemoveAll(a => (a.ThreadState & (ThreadState.Stopped)) != 0);
 
+                    //找出需要依序執行的thread
                     var result = (from a in serverThreads
                                   where a.Name.Substring(0, 2) != "[]"
                                   select a.Name.Substring(0, a.Name.IndexOf("]") + 1)).Distinct();
@@ -420,26 +455,6 @@ namespace AgentAIServer.MyService
 
             InputReceive(e.Client.RemoteEndPoint.ToString() + " Server Receive " + " " + e.Message);
 
-            #region 訊息柱列, 避免重複處理
-            //放入訊息柱列, 避免同IP同訊息重複傳送
-            string clientIP = ((IPEndPoint)(e.Client.RemoteEndPoint)).Address.ToString();
-            if (clientIP == null)
-            {
-                return;
-            }
-            ClientMessage clientMessage = ClientMessageQueue.Add(clientIP, e.Message);
-            if (clientMessage == null)
-            {
-                //例外: 訊息在回傳回來前被處理掉了, 多工又處理極快的速度下可能發生
-                return;
-            }
-            if (clientMessage.IP.Equals(string.Empty))
-            {
-                //重複發送
-                return;
-            }
-            #endregion
-
             #region 執行命令
             ClientMessageParameters cmp = new ClientMessageParameters();
             AIMLCounter aiml = new AIMLCounter();
@@ -450,9 +465,6 @@ namespace AgentAIServer.MyService
                 getMessage(message, (Socket)e.Client);
             }
             #endregion
-
-            //刪除訊息柱列
-            ClientMessageQueue.Remove(clientIP, e.Message);
         }
         #endregion
 
